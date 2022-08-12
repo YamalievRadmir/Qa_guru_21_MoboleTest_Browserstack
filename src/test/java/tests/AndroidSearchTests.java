@@ -12,7 +12,6 @@ import static io.qameta.allure.Allure.step;
 
 public class AndroidSearchTests extends TestBase {
 
-    @Tag("android")
     @Test
     public void searchArticle() {
         back();
