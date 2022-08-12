@@ -8,13 +8,17 @@ import static java.lang.String.format;
 
 public class Browserstack {
 
-    static Credentials config = ConfigFactory.create(Credentials.class);
+    //static Credentials config = ConfigFactory.create(Credentials.class);
 
     public static String videoUrl(String sessionId) {
         String url = format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
+        Credentials config = ConfigFactory.create(Credentials.class, System.getProperties());
+        String getLogin = config.getLogin();
+        String getPassword = config.getPassword();
+
         return given()
-                .auth().basic(config.getLogin(), config.getPassword())
+                .auth().basic(getLogin, getPassword)
                 .log().all()
                 .when()
                 .get(url)

@@ -13,15 +13,21 @@ import java.net.URL;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
 
-    Credentials config = ConfigFactory.create(Credentials.class);
+    //Credentials config = ConfigFactory.create(Credentials.class);
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
+
+        Credentials config = ConfigFactory.create(Credentials.class, System.getProperties());
+        String getLogin = config.getLogin();
+        String getPassword = config.getPassword();
+        String getAppUrl = config.getAppUrl();
+
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
         mutableCapabilities.merge(capabilities);
-        mutableCapabilities.setCapability("browserstack.user", config.getLogin());
-        mutableCapabilities.setCapability("browserstack.key", config.getPassword());
-        mutableCapabilities.setCapability("app", config.getAppUrl());
+        mutableCapabilities.setCapability("browserstack.user", getLogin);
+        mutableCapabilities.setCapability("browserstack.key", getPassword);
+        mutableCapabilities.setCapability("app", getAppUrl);
         mutableCapabilities.setCapability("device", "Google Pixel 3");
         mutableCapabilities.setCapability("os_version", "9.0");
         mutableCapabilities.setCapability("project", "First Java Project");
