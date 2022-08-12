@@ -3,7 +3,7 @@ package config;
 import org.aeonbits.owner.Config;
 
 
-@Config.Sources("resources/credentials.properties")
+@Config.Sources("classpath:credentials.properties")
 public interface Credentials extends Config {
 
     @Key("login")
